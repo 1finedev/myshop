@@ -22,6 +22,9 @@ export default StyleSheet.create({
   btnTitle: {
     fontSize: fontSize.xlg,
   },
+  signupBtnContainer: {
+    marginTop: proportionedPixel(15),
+  },
   signupBtn: {
     marginHorizontal: 10,
     backgroundColor: colors.darkGrey,
@@ -35,5 +38,8 @@ export default StyleSheet.create({
   },
   termsLink: {
     color: '#0081E5',
+  },
+  errorMessage: {
+    paddingLeft: proportionedPixel(5),
   },
 });

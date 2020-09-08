@@ -38,4 +38,7 @@ export default StyleSheet.create({
     borderRadius: 100,
     paddingVertical: proportionedPixel(5),
   },
+  errorMessage: {
+    paddingLeft: proportionedPixel(5),
+  },
 });

@@ -1,39 +1,95 @@
 import React from 'react';
 import {SafeAreaView, Text} from 'react-native';
 import {Input, Button} from 'react-native-elements';
+import {yupResolver} from '@hookform/resolvers';
+import {useForm, Controller} from 'react-hook-form';
+
 import {SignUpScreenProps} from '../../navigation';
 import styles from './signup.styles';
+import {SignUpInput} from './signup.validation';
+
+interface SignUpFormData {
+  fullName: string;
+  email: string;
+  password: string;
+}
 
 export const SignUp: React.FC<SignUpScreenProps> = () => {
+  const {control, handleSubmit, errors} = useForm<SignUpFormData>({
+    resolver: yupResolver(SignUpInput),
+  });
+
+  const onSubmit = (data: SignUpFormData) => console.log(data);
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Create new account</Text>
-      <Input
-        inputContainerStyle={styles.inputContainer}
-        placeholder="Full Name"
+      <Controller
+        control={control}
+        name="fullName"
+        defaultValue=""
+        render={({onChange, onBlur, value}) => {
+          return (
+            <Input
+              inputContainerStyle={styles.inputContainer}
+              placeholder="Full Name"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              errorMessage={errors.fullName?.message}
+              errorStyle={styles.errorMessage}
+            />
+          );
+        }}
       />
-      <Input
-        inputContainerStyle={styles.inputContainer}
-        placeholder="Email Address"
-        keyboardType="email-address"
-        textContentType="name"
+
+      <Controller
+        control={control}
+        name="email"
+        defaultValue=""
+        render={({onChange, onBlur, value}) => {
+          return (
+            <Input
+              inputContainerStyle={styles.inputContainer}
+              placeholder="Email Address"
+              textContentType="emailAddress"
+              keyboardType="email-address"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              errorMessage={errors.email?.message}
+              errorStyle={styles.errorMessage}
+            />
+          );
+        }}
       />
-      <Input
-        inputContainerStyle={styles.inputContainer}
-        placeholder="Phone Number"
-        keyboardType="phone-pad"
-        textContentType="telephoneNumber"
-      />
-      <Input
-        inputContainerStyle={styles.inputContainer}
-        placeholder="Password"
-        textContentType="password"
-        secureTextEntry
+
+      <Controller
+        control={control}
+        name="password"
+        defaultValue=""
+        render={({onChange, onBlur, value}) => {
+          return (
+            <Input
+              inputContainerStyle={styles.inputContainer}
+              placeholder="Password"
+              textContentType="password"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              secureTextEntry
+              errorMessage={errors.password?.message}
+              errorStyle={styles.errorMessage}
+            />
+          );
+        }}
       />
       <Button
-        title="Log In"
+        title="Sign Up"
         buttonStyle={styles.signupBtn}
+        containerStyle={styles.signupBtnContainer}
         titleStyle={styles.btnTitle}
+        onPress={handleSubmit(onSubmit)}
       />
       <Text style={styles.terms}>
         By creating an account you agree with our{' '}
