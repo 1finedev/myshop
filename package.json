@@ -14,6 +14,7 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
+    "@reduxjs/toolkit": "^1.4.0",
     "expo-font": "^8.2.2",
     "expo-splash-screen": "^0.5.0",
     "react": "16.13.1",
@@ -27,6 +28,7 @@
     "react-native-svg": "^12.1.0",
     "react-native-unimodules": "^0.10.1",
     "react-native-vector-icons": "^7.0.0",
+    "react-redux": "^7.2.1",
     "yup": "^0.29.3"
   },
   "devDependencies": {
@@ -36,6 +38,7 @@
     "@types/jest": "^26.0.13",
     "@types/react": "^16.9.49",
     "@types/react-native": "^0.63.15",
+    "@types/react-redux": "^7.1.9",
     "@types/react-test-renderer": "^16.9.3",
     "@types/yup": "^0.29.6",
     "babel-jest": "^26.3.0",
