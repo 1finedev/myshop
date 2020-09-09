@@ -1,13 +1,16 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {AuthNavigator} from './auth.navigation';
+import {DrawerNavigator} from './drawer.navigation';
 import {LoadingModal} from '../components';
+import {useGetUser} from '../redux';
 
 export const RootNavigator: React.FC = () => {
+  const user = useGetUser();
   return (
     <NavigationContainer>
       <LoadingModal />
-      <AuthNavigator />
+      {user ? <DrawerNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };
