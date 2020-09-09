@@ -2,11 +2,13 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {Input, Button} from 'react-native-elements';
+import {useDispatch} from 'react-redux';
 import {yupResolver} from '@hookform/resolvers';
 
 import {LoginScreenProps} from '../../navigation';
 import styles from './login.styles';
 import {LogInInput} from './login.validation';
+import {loginUser} from '../../redux';
 
 interface LoginInFormData {
   email: string;
@@ -14,11 +16,15 @@ interface LoginInFormData {
 }
 
 export const Login: React.FC<LoginScreenProps> = () => {
+  const dispath = useDispatch();
   const {control, handleSubmit, errors} = useForm<LoginInFormData>({
     resolver: yupResolver(LogInInput),
   });
 
-  const onSubmit = (data: LoginInFormData) => console.log(data);
+  const onSubmit = (data: LoginInFormData) => {
+    dispath(loginUser(data));
+  };
+
   return (
     <View>
       <Text style={styles.header}>Log In</Text>
@@ -33,6 +39,7 @@ export const Login: React.FC<LoginScreenProps> = () => {
               placeholder="Email Address"
               textContentType="emailAddress"
               keyboardType="email-address"
+              autoCapitalize="none"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
