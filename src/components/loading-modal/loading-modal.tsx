@@ -7,7 +7,7 @@ import {useGetLoadingState} from '../../redux/loadingSlice/loadingSlice.selector
 const LoadingModal: React.FC = () => {
   const {isLoading} = useGetLoadingState();
   return (
-    <Modal visible={isLoading} transparent>
+    <Modal visible={isLoading} transparent animationType="fade">
       <View style={styles.container}>
         <View style={styles.indicatorContainer}>
           <ActivityIndicator size="large" />
