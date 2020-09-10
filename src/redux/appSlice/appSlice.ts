@@ -11,6 +11,7 @@ import {AppThunk} from '../store';
 const initialState: AppState = {
   isLoading: false,
   user: null,
+  categories: null,
 };
 
 const appSplice = createSlice({

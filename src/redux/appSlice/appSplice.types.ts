@@ -1,8 +1,9 @@
-import {User, LoginData, SignUpData} from '../../api';
+import {User, LoginData, SignUpData, Category} from '../../api';
 
 export interface AppState {
   isLoading: boolean;
   user: User | null;
+  categories: Category[] | null;
 }
 
 export interface SetUserPayload {
