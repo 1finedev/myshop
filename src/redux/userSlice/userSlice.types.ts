@@ -1,20 +1,14 @@
-interface User {
-  fullName: string;
-  email: string;
-}
+import {User, LoginData, SignUpData} from '../../api';
 
 export interface UserState {
   user: User | null;
   token: string | null;
 }
 
-export interface LoginPayload {
-  email: string;
-  password: string;
+export interface SetUserPayload {
+  user: User;
 }
 
-export interface SignUpPayload {
-  fullName: string;
-  email: string;
-  password: string;
-}
+export type LoginPayload = LoginData;
+
+export type SignUpPayload = SignUpData;

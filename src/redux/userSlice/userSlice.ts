@@ -1,7 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {UserState, LoginPayload, SignUpPayload} from './userSlice.types';
+import {
+  UserState,
+  LoginPayload,
+  SignUpPayload,
+  SetUserPayload,
+} from './userSlice.types';
 import {AppThunk} from '../store';
 import {toggleIsLoading} from '../loadingSlice';
+import * as api from '../../api';
 
 const initialState: UserState = {
   user: null,
@@ -12,27 +18,26 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<LoginPayload>) => {
-      const {email} = action.payload;
-      state.user = {email, fullName: 'John Doe'};
+    setUser: (state, action: PayloadAction<SetUserPayload>) => {
+      state.user = action.payload.user;
     },
-    signup: (state, action: PayloadAction<SignUpPayload>) => {
-      state.user = action.payload;
+    removeUser: (state) => {
+      state.user = null;
     },
   },
 });
 
-export const {login, signup} = userSlice.actions;
+export const {setUser} = userSlice.actions;
 export const user = userSlice.reducer;
 
 export const loginUser = (data: LoginPayload): AppThunk => async (dispatch) => {
   try {
     dispatch(toggleIsLoading());
 
-    setTimeout(function () {
-      dispatch(toggleIsLoading());
-      dispatch(login(data));
-    }, 2000);
+    const authUser = await api.login(data);
+
+    dispatch(toggleIsLoading());
+    dispatch(setUser({user: authUser}));
   } catch (error) {
     console.error(error);
   }
@@ -44,10 +49,10 @@ export const signupUser = (data: SignUpPayload): AppThunk => async (
   try {
     dispatch(toggleIsLoading());
 
-    setTimeout(function () {
-      dispatch(toggleIsLoading());
-      dispatch(signup(data));
-    }, 2000);
+    const authUser = await api.signup(data);
+
+    dispatch(toggleIsLoading());
+    dispatch(setUser({user: authUser}));
   } catch (error) {
     console.error(error);
   }
