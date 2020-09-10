@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthNavigator} from './auth.navigation';
-import {DrawerNavigator} from './drawer.navigation';
+import {AuthNavigator} from './auth';
+import {DrawerNavigator} from './drawer';
 import {LoadingModal} from '../components';
 import {useGetUser} from '../redux';
 

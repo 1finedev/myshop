@@ -1,12 +1,13 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {AuthStackParamList} from './types.navigation';
-import {Landing, Login, SignUp} from '../screens';
-import {defaultAuthStackNavigationOptions} from './utils.navigation';
+
+import {Landing, Login, SignUp} from '../../screens';
+import {defaultAuthStackNavigationOptions} from '../utils.navigation';
+import {AuthStackParamList} from './auth.types';
 
 const AuthStack = createStackNavigator<AuthStackParamList>();
 
-export const AuthNavigator: React.FC = () => {
+const AuthNavigator: React.FC = () => {
   return (
     <AuthStack.Navigator screenOptions={defaultAuthStackNavigationOptions}>
       <AuthStack.Screen
@@ -19,3 +20,5 @@ export const AuthNavigator: React.FC = () => {
     </AuthStack.Navigator>
   );
 };
+
+export default AuthNavigator;
