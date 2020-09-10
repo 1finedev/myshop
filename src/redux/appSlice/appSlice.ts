@@ -1,23 +1,25 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
-  UserState,
+  AppState,
+  SetUserPayload,
   LoginPayload,
   SignUpPayload,
-  SetUserPayload,
-} from './userSlice.types';
-import {AppThunk} from '../store';
-import {toggleIsLoading} from '../loadingSlice';
+} from './appSplice.types';
 import * as api from '../../api';
+import {AppThunk} from '../store';
 
-const initialState: UserState = {
+const initialState: AppState = {
+  isLoading: false,
   user: null,
-  token: null,
 };
 
-const userSlice = createSlice({
-  name: 'user',
+const appSplice = createSlice({
+  name: 'app',
   initialState,
   reducers: {
+    toggleIsLoading: (state) => {
+      state.isLoading = !state.isLoading;
+    },
     setUser: (state, action: PayloadAction<SetUserPayload>) => {
       state.user = action.payload.user;
     },
@@ -27,8 +29,8 @@ const userSlice = createSlice({
   },
 });
 
-export const {setUser} = userSlice.actions;
-export const user = userSlice.reducer;
+export const {toggleIsLoading, setUser, removeUser} = appSplice.actions;
+export const appReducer = appSplice.reducer;
 
 export const loginUser = (data: LoginPayload): AppThunk => async (dispatch) => {
   try {

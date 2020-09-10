@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {AuthNavigator} from './auth';
 import {DrawerNavigator} from './drawer';
@@ -7,6 +7,11 @@ import {useGetUser} from '../redux';
 
 export const RootNavigator: React.FC = () => {
   const user = useGetUser();
+
+  useEffect(() => {
+    if (user) {
+    }
+  }, [user]);
   return (
     <NavigationContainer>
       <LoadingModal />

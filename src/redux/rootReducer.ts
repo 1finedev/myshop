@@ -1,11 +1,7 @@
-import {combineReducers} from '@reduxjs/toolkit';
-import {user} from './userSlice';
-import {loading} from './loadingSlice';
+// import {combineReducers} from '@reduxjs/toolkit';
+import {appReducer} from './appSlice/appSlice';
 
-const rootReducer = combineReducers({
-  user,
-  loading,
-});
+const rootReducer = appReducer;
 
 export type RootState = ReturnType<typeof rootReducer>;
 

@@ -1,8 +1,8 @@
 import {User, LoginData, SignUpData} from '../../api';
 
-export interface UserState {
+export interface AppState {
+  isLoading: boolean;
   user: User | null;
-  token: string | null;
 }
 
 export interface SetUserPayload {

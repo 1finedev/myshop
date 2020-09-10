@@ -2,10 +2,10 @@ import React from 'react';
 import {Modal, View, ActivityIndicator} from 'react-native';
 
 import styles from './loading-modal.styles';
-import {useGetLoadingState} from '../../redux/loadingSlice/loadingSlice.selectors';
+import {useGetIsLoading} from '../../redux';
 
 const LoadingModal: React.FC = () => {
-  const {isLoading} = useGetLoadingState();
+  const isLoading = useGetIsLoading();
   return (
     <Modal visible={isLoading} transparent animationType="fade">
       <View style={styles.container}>
