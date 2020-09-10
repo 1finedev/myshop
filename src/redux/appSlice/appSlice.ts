@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   AppState,
   SetUserPayload,
@@ -39,8 +40,9 @@ export const loginUser = (data: LoginPayload): AppThunk => async (dispatch) => {
 
     const authUser = await api.login(data);
 
-    dispatch(toggleIsLoading());
+    await AsyncStorage.setItem('user', JSON.stringify(authUser));
     dispatch(setUser({user: authUser}));
+    dispatch(toggleIsLoading());
   } catch (error) {
     console.error(error);
   }
@@ -54,8 +56,9 @@ export const signupUser = (data: SignUpPayload): AppThunk => async (
 
     const authUser = await api.signup(data);
 
-    dispatch(toggleIsLoading());
+    await AsyncStorage.setItem('user', JSON.stringify(authUser));
     dispatch(setUser({user: authUser}));
+    dispatch(toggleIsLoading());
   } catch (error) {
     console.error(error);
   }

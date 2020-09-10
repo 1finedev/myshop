@@ -15,10 +15,10 @@ const App = () => {
     return <SplashScreen />;
   } else {
     return (
-      <Provider store={store}>
+      <>
         <StatusBar barStyle="dark-content" />
         <RootNavigator />
-      </Provider>
+      </>
     );
   }
 };

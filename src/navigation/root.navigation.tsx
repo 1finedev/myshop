@@ -8,10 +8,7 @@ import {useGetUser} from '../redux';
 export const RootNavigator: React.FC = () => {
   const user = useGetUser();
 
-  useEffect(() => {
-    if (user) {
-    }
-  }, [user]);
+  useEffect(() => {}, [user]);
   return (
     <NavigationContainer>
       <LoadingModal />
