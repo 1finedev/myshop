@@ -5,6 +5,7 @@ import {
   SetUserPayload,
   LoginPayload,
   SignUpPayload,
+  SetCategoriesPayload,
 } from './appSplice.types';
 import * as api from '../../api';
 import {AppThunk} from '../store';
@@ -28,10 +29,18 @@ const appSplice = createSlice({
     removeUser: (state) => {
       state.user = null;
     },
+    setCategories: (state, action: PayloadAction<SetCategoriesPayload>) => {
+      state.categories = action.payload.categories;
+    },
   },
 });
 
-export const {toggleIsLoading, setUser, removeUser} = appSplice.actions;
+export const {
+  toggleIsLoading,
+  setUser,
+  removeUser,
+  setCategories,
+} = appSplice.actions;
 export const appReducer = appSplice.reducer;
 
 export const loginUser = (data: LoginPayload): AppThunk => async (dispatch) => {
@@ -58,6 +67,19 @@ export const signupUser = (data: SignUpPayload): AppThunk => async (
 
     await AsyncStorage.setItem('user', JSON.stringify(authUser));
     dispatch(setUser({user: authUser}));
+    dispatch(toggleIsLoading());
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchCategories = (): AppThunk => async (dispatch) => {
+  try {
+    dispatch(toggleIsLoading());
+    const categories = await api.fetchCategories();
+
+    dispatch(setCategories({categories}));
+
     dispatch(toggleIsLoading());
   } catch (error) {
     console.error(error);

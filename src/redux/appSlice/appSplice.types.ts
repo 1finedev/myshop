@@ -13,3 +13,7 @@ export interface SetUserPayload {
 export type LoginPayload = LoginData;
 
 export type SignUpPayload = SignUpData;
+
+export interface SetCategoriesPayload {
+  categories: Category[];
+}

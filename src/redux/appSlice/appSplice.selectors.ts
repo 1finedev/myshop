@@ -8,3 +8,7 @@ export const useGetUser = (): AppState['user'] => {
 export const useGetIsLoading = (): AppState['isLoading'] => {
   return useSelector((state: AppState) => state.isLoading);
 };
+
+export const useGetCategories = (): AppState['categories'] => {
+  return useSelector((state: AppState) => state.categories);
+};
